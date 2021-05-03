@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This is a Shadow Shark listener.
+This is a Shadow Shark payload.
 
 @author: Mr. Shark Spam Bot
 """
