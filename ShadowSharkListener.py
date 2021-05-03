@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb  9 12:34:14 2021
+This tool is a full fledged reverse TCP handler used to interact with Shadow Shark payloads.
 
 @author: Mr. Shark Spam Bot
 """
