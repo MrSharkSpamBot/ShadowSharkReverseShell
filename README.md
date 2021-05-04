@@ -15,7 +15,6 @@ $ git clone https://github.com/MrSharkSpamBot/Shadow-Shark-Listener.git
 
 ## Usage
 ### ShadowSharkListener.py
-Note: This tool is meant to be run on a Linux enviornment.
 ```
 $ python3 ShadowSharkListener.py --help
 	                                             ``
@@ -79,4 +78,4 @@ $ python3 ShadowSharkListener.py --lhost 0.0.0.0 --lport 8080
 [*] A reverse TCP handler on 0.0.0.0:8080 has successfully started...
 ```
 ### ShadowSharkPayload.py
-This payload can run on any operating system. To configure the payload go to line
+This payload can run on any operating system. To configure the payload go to line 29 and replace IP with your IP and replace PORT with the port on your computer you want connections be sent to and from.
