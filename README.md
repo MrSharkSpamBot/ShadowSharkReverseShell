@@ -83,6 +83,6 @@ This payload can run on any operating system. To configure the payload go to lin
 This compilation script can only be run on a windows machine or by using wine. To configure the compilation script go to line 14 and replace ICON with the icon file you want your exe file to have to have. To do this make sure that the ShadowSharkPayload.py script, your icon file, and the ShadowSharkPayloadCompile.py script are in the same folder and that py2exe is installed.
 ```
 # First install python3 on you windows machine or wine enviornment.
-pip install py2exe
-python ShadowSharkPayloadCompile.py py2exe
+$ pip install py2exe
+$ python ShadowSharkPayloadCompile.py py2exe
 ```
