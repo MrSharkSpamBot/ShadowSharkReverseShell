@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This script is used to compile Shadow Shark payloads.
+This script is used to compile Shadow Shark payloads into stand alone exe files.
 
 @author: Mr. Shark Spam Bot
 """
