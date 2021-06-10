@@ -5,12 +5,12 @@ A full fledged reverse TCP handler written in pure python3 that is used to inter
 ### Debian
 ```
 $ sudo apt-get install python3 git
-$ git clone https://github.com/MrSharkSpamBot/Shadow-Shark-Listener.git
+$ git clone https://github.com/MrSharkSpamBot/ShadowSharkListener.git
 ```
 ### Arch
 ```
 $ sudo pacman -S python git
-$ git clone https://github.com/MrSharkSpamBot/Shadow-Shark-Listener.git
+$ git clone https://github.com/MrSharkSpamBot/ShadowSharkListener.git
 ```
 
 ## Usage
