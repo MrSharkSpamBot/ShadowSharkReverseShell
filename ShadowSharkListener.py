@@ -63,16 +63,16 @@ def listen():
         try:
             rev_socket.bind((lhost, lport))
         except OSError:
-            print('\n[-] Lhost is not set to your IP or a process is currently running on lport.')
-            print('[-] Terminating program.')
+            print(f'{red}\n[-] Lhost is not set to your IP or a process is currently running on lport.{normal}')
+            print(f'{red}[-] Terminating program.{normal}')
             sys.exit()
         rev_socket.listen(1)
-        print(f'[*] A reverse TCP handler on {lhost}:{lport} has successfully started...')
+        print(f'{blue}[*] A reverse TCP handler on {lhost}:{lport} has successfully started...{normal}')
         connection, address = rev_socket.accept()
         return [rev_socket, connection, address]
     except KeyboardInterrupt:
-        print('\n[+] Ctrl + c detected.')
-        print('[-] Terminating program.')
+        print(f'{yellow}\n[+] Ctrl + c detected.{normal}')
+        print(f'{red}[-] Terminating program.{normal}')
         rev_socket.close()
         sys.exit()
 
@@ -82,7 +82,7 @@ def main():
         rev_socket, connection, address = listen()
         rhost = address[0]
         rport = address[1]
-        print(f'[+] A TCP connection from {rhost}:{rport} has been received.\n')
+        print(f'{green}[+] A TCP connection from {rhost}:{rport} has been received.\n{normal}')
 
         try:
             while True:
@@ -127,14 +127,14 @@ def main():
                 if recv.strip():
                     print(recv.strip())
         except ConnectionError:
-            print('\n[-] The reverse TCP connection was broken.')
-            print('[-] Terminating program.')
+            print(f'{red}\n[-] The reverse TCP connection was broken.{normal}')
+            print(f'{red}[-] Terminating program.{normal}')
             connection.close()
             rev_socket.close()
             sys.exit()
     except KeyboardInterrupt:
-        print('\n[+] Ctrl + c detected.')
-        print('[-] Terminating program.')
+        print(f'{yellow}\n[+] Ctrl + c detected.{normal}')
+        print(f'{normal}[-] Terminating program.{normal}')
         connection.send(encryption_handler('exit', encode=True))
         connection.close()
         rev_socket.close()
@@ -165,5 +165,10 @@ if __name__ == '__main__':
 \t                                           .odNMm:
 \t                                             `-/sh:
     ''')
+    normal = '\033[0m'
+    blue = '\033[94m'
+    green = '\033[92m'
+    yellow = '\33[33m'
+    red = '\033[91m'
     arguments = get_arguments()
     main()
