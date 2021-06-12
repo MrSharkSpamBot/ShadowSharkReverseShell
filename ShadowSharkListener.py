@@ -134,7 +134,7 @@ def main():
             sys.exit()
     except KeyboardInterrupt:
         print(f'{yellow}\n[+] Ctrl + c detected.{normal}')
-        print(f'{normal}[-] Terminating program.{normal}')
+        print(f'{red}[-] Terminating program.{normal}')
         connection.send(encryption_handler('exit', encode=True))
         connection.close()
         rev_socket.close()
