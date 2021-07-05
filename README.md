@@ -1,5 +1,5 @@
-# Shadow Shark Listener
-A full fledged reverse TCP handler written in pure python3 that is used to interact with Shadow Shark payloads.
+# Shadow Shark Reverse Shell 
+A full fledged reverse TCP payload written in pure python3.
 
 ## Installation
 ### Debian
