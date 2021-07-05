@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This is a Shadow Shark payload.
+A full fledged reverse TCP payload.
 
 @author: Mr. Shark Spam Bot
 """
