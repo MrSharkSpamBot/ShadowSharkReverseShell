@@ -87,5 +87,5 @@ This compilation script can only be run on a windows machine or by using wine. T
 ```
 # First install python3 on your windows machine or wine environment.
 $ pip install py2exe
-$ python ShadowSharkPayloadCompile.py py2exe
+$ python Compile.py py2exe
 ```
