@@ -5,18 +5,18 @@ A full fledged reverse TCP payload written in pure python3.
 ### Debian
 ```
 $ sudo apt-get install python3 git
-$ git clone https://github.com/MrSharkSpamBot/ShadowSharkListener.git
+$ git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 ```
 ### Arch
 ```
 $ sudo pacman -S python git
-$ git clone https://github.com/MrSharkSpamBot/ShadowSharkListener.git
+$ git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 ```
 
 ## Usage
-### ShadowSharkListener.py
+### ShadowShark.py
 ```
-$ python3 ShadowSharkListener.py --help
+$ python3 ShadowShark.py --help
                                                      ``
                                                ``-+yhh-
                                             `:ohNMMMy.                  `.-`
