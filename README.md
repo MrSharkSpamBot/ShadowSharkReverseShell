@@ -82,6 +82,8 @@ $ python3 ShadowSharkListener.py --lhost 0.0.0.0 --lport 8080 --encryption hex
 ```
 ### ShadowSharkPayload.py
 This payload can run on Linux, Windows, and MacOS. To configure the payload go to line 29 and replace IP with your IP and replace PORT with the port on your computer you want connections be sent to and from.
+### UnixPayload.py
+This payload can run on any Unix based system. To configure the payload go to line 35 and replace IP with your IP and replace PORT with the port on your computer you want connections be sent to and from.
 ### Compile.py
 This compilation script can only be run on a windows machine or by using wine. To configure the compilation script go to line 14 and replace ICON with the icon file you want your exe file to have to have. To do this make sure that the ShadowSharkPayload.py script, your icon file, and the Compile.py script are in the same folder and that py2exe is installed.
 ```
