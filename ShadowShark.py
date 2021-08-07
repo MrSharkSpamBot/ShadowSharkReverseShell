@@ -14,11 +14,11 @@ def get_arguments():
     '''Get the lhost and lport.'''
     parser = argparse.ArgumentParser(description='''This tool is a full fledged reverse TCP handler
 used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
-    parser.add_argument('--lh', '--lhost', dest='lhost', required=True, type=str,
+    parser.add_argument('-lh', '--lhost', dest='lhost', required=True, type=str,
                         help='Your IP address.')
-    parser.add_argument('--lp', '--lport', dest='lport', required=True, type=int,
+    parser.add_argument('-lp', '--lport', dest='lport', required=True, type=int,
                         help='The port to listen for connections on.')
-    parser.add_argument('--encryption', '-e', dest='encryption', required=True,
+    parser.add_argument('-e', '--encryption', dest='encryption', required=True,
                         type=str, help='The encryption used for sent and recieved data.')
     options = parser.parse_args()
     lhost = options.lhost
