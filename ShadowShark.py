@@ -168,7 +168,7 @@ if __name__ == '__main__':
     NORMAL = '\033[0m'
     BLUE = '\033[94m'
     GREEN = '\033[92m'
-    YELLOW = '\33[33m'
+    YELLOW = '\033[93m'
     RED = '\033[91m'
     arguments = get_arguments()
     main()
