@@ -5,12 +5,20 @@ A full fledged reverse TCP payload written in pure python3.
 ### Debian
 ```
 $ sudo apt-get install python3 git
-$ git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
+$ cd /opt
+$ sudo git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
+$ cd ShadowSharkReverseShell/
+$ chmod +x ShadowShark
+$ sudo cp ShadowShark /usr/bin
 ```
 ### Arch
 ```
 $ sudo pacman -S python git
+$ cd /opt
 $ git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
+$ cd ShadowSharkReverseShell/
+$ chmod +x ShadowShark
+$ sudo cp ShadowShark /usr/bin
 ```
 
 ## Usage
