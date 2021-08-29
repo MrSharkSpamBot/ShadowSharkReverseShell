@@ -9,7 +9,7 @@ $ cd /opt
 $ sudo git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 $ cd ShadowSharkReverseShell/
 $ sudo chmod +x ShadowShark
-$ sudo cp ShadowShark /usr/bin
+$ sudo cp ShadowShark /usr/bin/
 ```
 ### Arch
 ```
@@ -18,7 +18,7 @@ $ cd /opt
 $ git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 $ cd ShadowSharkReverseShell/
 $ sudo chmod +x ShadowShark
-$ sudo cp ShadowShark /usr/bin
+$ sudo cp ShadowShark /usr/bin/
 ```
 
 ## Usage
