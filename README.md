@@ -5,7 +5,7 @@ A full fledged reverse TCP payload written in pure python3.
 ### Debian
 ```
 $ sudo apt-get install python3 git
-$ cd /opt
+$ cd /opt/
 $ sudo git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 $ cd ShadowSharkReverseShell/
 $ sudo chmod +x ShadowShark
@@ -14,7 +14,7 @@ $ sudo cp ShadowShark /usr/bin/
 ### Arch
 ```
 $ sudo pacman -S python git
-$ cd /opt
+$ cd /opt/
 $ git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 $ cd ShadowSharkReverseShell/
 $ sudo chmod +x ShadowShark
