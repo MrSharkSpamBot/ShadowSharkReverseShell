@@ -8,7 +8,7 @@ $ sudo apt-get install python3 git
 $ cd /opt
 $ sudo git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 $ cd ShadowSharkReverseShell/
-$ chmod +x ShadowShark
+$ sudo chmod +x ShadowShark
 $ sudo cp ShadowShark /usr/bin
 ```
 ### Arch
@@ -17,7 +17,7 @@ $ sudo pacman -S python git
 $ cd /opt
 $ git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 $ cd ShadowSharkReverseShell/
-$ chmod +x ShadowShark
+$ sudo chmod +x ShadowShark
 $ sudo cp ShadowShark /usr/bin
 ```
 
