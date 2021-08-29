@@ -15,7 +15,7 @@ $ sudo cp ShadowShark /usr/bin/
 ```
 $ sudo pacman -S python git
 $ cd /opt/
-$ git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
+$ sudo git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 $ cd ShadowSharkReverseShell/
 $ sudo chmod +x ShadowShark
 $ sudo cp ShadowShark /usr/bin/
