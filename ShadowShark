@@ -1,13 +1,3 @@
 #!/bin/bash
 
-options=''
-
-for option in $@
-
-	do
-
-		options+=$option' '
-
-	done
-
-python3 /opt/ShadowSharkReverseShell/ShadowShark.py $options
+python3 /opt/ShadowSharkReverseShell/ShadowShark.py ${@}
