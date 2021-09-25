@@ -27,7 +27,9 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
     try:
         socket.inet_aton(lhost)
     except socket.error:
-        parser.error('Invalid option specified for lhost.')
+        parser.error('Invalid value specified for LHOST.')
+    if lhost.count('.') != 3:
+        parser.error('Invalid value specified for LHOST.')
     if encryption not in ['hex', 'base64']:
         parser.error('Only hex and base64 encryptions are supported.')
     return [lhost, lport, encryption]
@@ -63,7 +65,7 @@ def listen():
         try:
             rev_socket.bind((lhost, lport))
         except OSError:
-            print(f'{RED}\n[-] Lhost is not set to your IP or a process is currently running on lport.{NORMAL}')
+            print(f'{RED}\n[-] LHOST is not set to your IP or a process is currently running on LPORT.{NORMAL}')
             print(f'{RED}[-] Terminating program.{NORMAL}')
             sys.exit()
         rev_socket.listen(1)
