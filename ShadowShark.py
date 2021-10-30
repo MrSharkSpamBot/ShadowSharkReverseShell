@@ -9,6 +9,7 @@ import socket
 import sys
 import codecs
 import json
+import readline
 
 def get_arguments():
     '''Get the lhost and lport.'''
