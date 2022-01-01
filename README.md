@@ -106,7 +106,7 @@ $ python Compile.py py2exe
 ```
 # First install python3 on your Windows computer or Wine environment.
 $ pip install nuitka zstandard
-$ nuitka --windows-disable-console  --windows-icon-from-ico=icon.ico --onefile WindowsPayload.py
+$ nuitka --windows-disable-console --windows-icon-from-ico=icon.ico --onefile WindowsPayload.py
 ```
 
 ## Post Exploitation
