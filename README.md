@@ -102,6 +102,12 @@ This compilation script can only be run on a Windows computer or Wine environmen
 $ pip install py2exe
 $ python Compile.py py2exe
 ```
+### Compiling for any system.
+```
+# First install python3 on your computer.
+$ pip3 install nuitka zstandard
+$ nuitka --windows-disable-console  --windows-icon-from-ico=icon.ico --onefile UnixPayload.py
+```
 
 ## Post Exploitation
 <a href="https://github.com/BababooeyHackers/ScreenView">Screen View</a>
