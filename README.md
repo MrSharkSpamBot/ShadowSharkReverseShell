@@ -104,7 +104,7 @@ $ python Compile.py py2exe
 ```
 ### Alternative compilation
 ```
-# First install python3 on your Windows computer or Wine enviornment.
+# First install python3 on your Windows computer or Wine environment.
 $ pip3 install nuitka zstandard
 $ nuitka --windows-disable-console  --windows-icon-from-ico=icon.ico --onefile WindowsPayload.py
 ```
