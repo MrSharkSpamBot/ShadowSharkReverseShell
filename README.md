@@ -102,11 +102,11 @@ This compilation script can only be run on a Windows computer or Wine environmen
 $ pip install py2exe
 $ python Compile.py py2exe
 ```
-### Compiling for any system.
+### Alternative compilation
 ```
-# First install python3 on your computer.
+# First install python3 on your Windows computer or Wine enviornment.
 $ pip3 install nuitka zstandard
-$ nuitka --windows-disable-console  --windows-icon-from-ico=icon.ico --onefile UnixPayload.py
+$ nuitka --windows-disable-console  --windows-icon-from-ico=icon.ico --onefile WindowsPayload.py
 ```
 
 ## Post Exploitation
