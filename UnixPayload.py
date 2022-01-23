@@ -98,7 +98,7 @@ while True:
     if command.startswith('cd') and len(command.split()) >= 2:
         try:
             if command[3] == '~':
-                os.chdir(f'{os.path.expanduser('~')}{command[4:]}')
+                os.chdir(f'{os.path.expanduser("~")}{command[4:]}')
             else:
                 os.chdir(command[3:])
         except IOError:
