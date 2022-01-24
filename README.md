@@ -92,7 +92,7 @@ $ ShadowShark --lhost 0.0.0.0 --lport 8080 --encryption hex
 ### ShadowSharkPayload.py
 This payload can run on Linux, Windows, and MacOS. To configure the payload go to line 29 and replace IP with your IP and replace PORT with the port on your computer you want connections be sent to and from.
 ### UnixPayload.py
-This payload can run on any Unix based system. To configure the payload go to line 35 and replace IP with your IP and replace PORT with the port on your computer you want connections be sent to and from. The command directory prints the current working directory. The command background_exec runs any bash command in the background.
+This payload can run on any Unix based system. To configure the payload go to line 35 and replace IP with your IP and replace PORT with the port on your computer you want connections be sent to and from. The command directory prints the current working terminal prompt. The command background_exec runs any bash command in the background.
 ### WindowsPayload.py
 This payload can run on any Windows system. To configure the payload go to line 29 and replace IP with your IP and replace PORT with the port on your computer you want connections be sent to and from. The command directory prints the current working directory. The command background_exec runs any cmd command in the background.
 ### Compile.py
