@@ -111,6 +111,9 @@ def main():
                     connection.close()
                     rev_socket.close()
                     sys.exit()
+                if command == 'multiline':
+                    print(f'{YELLOW}\n[!] Press Ctrl + d once you are finished.{NORMAL}')
+                    command = sys.stdin.read()
                 if not command.strip():
                     continue
                 connection.send(encryption_handler(command, encode=True))
