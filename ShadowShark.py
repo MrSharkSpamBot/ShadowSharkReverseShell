@@ -27,6 +27,7 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
     lhost = options.lhost
     lport = options.lport
     encryption = options.encryption.lower()
+    dictionary_key = {}
     try:
         socket.inet_aton(lhost)
     except socket.error:
@@ -37,13 +38,12 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
         parser.error('Only hex, base64, and CadaverousCipher encryptions are supported.')
     if encryption == 'cadaverouscipher':
         dictionary_key = json.load('dictionary_key.dict')
-    else:
-        dictionary_key = None
     return [lhost, lport, encryption, dictionary_key]
 
 def encryption_handler(text, encode=False, decode=False):
     '''Encode or decode text using hex or base64.'''
     encryption = arguments[2]
+    dictionary_key = arguments[3]
     if encode is True:
         new_text = text.encode()
         if encryption == 'hex':
@@ -51,6 +51,8 @@ def encryption_handler(text, encode=False, decode=False):
         if encryption == 'base64':
             new_text = codecs.encode(new_text, encoding='base64')
         new_text = new_text.decode()
+        if encryption == 'cadaverouscipher':
+            new_text = cadaverouscipher.encrypt(new_text, dictionary_key)
         new_text = json.dumps(new_text)
         new_text = new_text.encode()
     if decode is True:
@@ -61,6 +63,8 @@ def encryption_handler(text, encode=False, decode=False):
         if encryption == 'base64':
             new_text = codecs.decode(new_text, encoding='base64')
         new_text = new_text.decode()
+        if encryption == 'cadaverouscipher':
+            new_text = cadaverouscipher.decrypt(new_text, dictionary_key)
     return new_text
 
 def listen():
