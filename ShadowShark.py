@@ -7,7 +7,6 @@ This tool is a full fledged reverse TCP handler used to interact with Shadow Sha
 import argparse
 import socket
 import sys
-import os
 import codecs
 import json
 import readline
