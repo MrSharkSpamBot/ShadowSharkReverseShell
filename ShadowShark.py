@@ -22,7 +22,7 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
                         help='The port to listen for connections on.')
     parser.add_argument('-e', '--encryption', dest='encryption', required=True,
                         type=str, help='The encryption used for sent and recieved data.')
-    parser.add_argument('-dk', '--dictionary-key', dest='dictionary-key', required=False,
+    parser.add_argument('-dk', '--dictionary-key', dest='dictionary_key', required=False,
                         type=str, help='The file containing the dictionary key for CadaverousCipher encryption.')
     options = parser.parse_args()
     lhost = options.lhost
