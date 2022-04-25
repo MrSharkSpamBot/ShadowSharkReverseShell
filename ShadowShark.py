@@ -10,6 +10,7 @@ import sys
 import codecs
 import json
 import readline
+from lib import cadaverouscipher
 
 def get_arguments():
     '''Get the lhost and lport.'''
@@ -21,18 +22,21 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
                         help='The port to listen for connections on.')
     parser.add_argument('-e', '--encryption', dest='encryption', required=True,
                         type=str, help='The encryption used for sent and recieved data.')
+    parser.add_argument('-dk', '--dictionary-key', dest='dictionary-key', required=False,
+                        type=str, help='The file containing the dictionary key for CadaverousCipher encryption.')
     options = parser.parse_args()
     lhost = options.lhost
     lport = options.lport
-    encryption = options.encryption
+    encryption = options.encryption.lower()
+    dictionary_key = options.dictionary_key
     try:
         socket.inet_aton(lhost)
     except socket.error:
         parser.error('Invalid value specified for LHOST.')
     if lhost.count('.') != 3:
         parser.error('Invalid value specified for LHOST.')
-    if encryption not in ['hex', 'base64']:
-        parser.error('Only hex and base64 encryptions are supported.')
+    if encryption not in ['hex', 'base64', 'CadaverousCipher']:
+        parser.error('Only hex, base64, and CadaverousCipher encryptions are supported.')
     return [lhost, lport, encryption]
 
 def encryption_handler(text, encode=False, decode=False):
