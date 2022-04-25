@@ -35,7 +35,7 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
         parser.error('Invalid value specified for LHOST.')
     if lhost.count('.') != 3:
         parser.error('Invalid value specified for LHOST.')
-    if encryption not in ['hex', 'base64', 'CadaverousCipher']:
+    if encryption not in ['hex', 'base64', 'cadaverouscipher']:
         parser.error('Only hex, base64, and CadaverousCipher encryptions are supported.')
     return [lhost, lport, encryption]
 
