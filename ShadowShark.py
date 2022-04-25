@@ -35,8 +35,11 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
         parser.error('Invalid value specified for LHOST.')
     if encryption not in ['hex', 'base64', 'cadaverouscipher']:
         parser.error('Only hex, base64, and CadaverousCipher encryptions are supported.')
-    if os.path.exists('
-    return [lhost, lport, encryption]
+    if encryption == 'cadaverouscipher':
+        dictionary_key = json.load('dictionary_key.dict')
+    else:
+        dictionary_key = None
+    return [lhost, lport, encryption, dictionary_key]
 
 def encryption_handler(text, encode=False, decode=False):
     '''Encode or decode text using hex or base64.'''
