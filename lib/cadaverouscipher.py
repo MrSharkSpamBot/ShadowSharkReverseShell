@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-An uncrackable substitution cipher using randomly generated characters.
+An uncrackable substitution cipher which uses randomly generated characters as substitutes.
 
 @author: Mr. Shark Spam Bot
 """
