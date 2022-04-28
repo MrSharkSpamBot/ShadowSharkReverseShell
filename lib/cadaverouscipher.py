@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Uncrackable hybrid cryptography using both substitution and data shuffling.
+An uncrackable substitution cipher using randomly generated characters.
 
 @author: Mr. Shark Spam Bot
 """
