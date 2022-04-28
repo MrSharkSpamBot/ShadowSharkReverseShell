@@ -36,7 +36,8 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
     if encryption not in ['hex', 'base64', 'cadaverouscipher']:
         parser.error('Only hex, base64, and CadaverousCipher encryptions are supported.')
     if encryption == 'cadaverouscipher':
-        dictionary_key = json.load('dictionary_key.json')
+        with open('dictionary_key.json', 'w') as dictionary_key:
+            dictionary_key = json.load(dictionary_key)
     return [lhost, lport, encryption, dictionary_key]
 
 def encryption_handler(text, encode=False, decode=False):
