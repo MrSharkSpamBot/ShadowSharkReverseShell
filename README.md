@@ -89,7 +89,7 @@ $ ShadowShark --lhost 0.0.0.0 --lport 8080 --encryption hex
     
 [*] A reverse TCP handler on 0.0.0.0:8080 has successfully started...
 ```
-The current supported encryptions are hex, base64, and  <a href="https://github.com/MrSharkSpamBot/CadaverousCipher">CadaverousCipher</a>. To use CadaverousCipher encryption, generate a dictionary as shown its github page and save the dictionary to the file dictionary_key.json. To send data with newline characters use the command multiline.
+The current supported encryptions are hex, base64, and  <a href="https://github.com/MrSharkSpamBot/CadaverousCipher">CadaverousCipher</a>. To use CadaverousCipher encryption, generate a dictionary as shown its github page and save the dictionary to the file dictionary_key.json. To send data with newline characters, use the command multiline.
 ### ShadowSharkPayload.py
 This payload can run on Linux, Windows, and MacOS. To configure the payload go to line 29 and replace IP with your IP and replace PORT with the port on your computer you want connections be sent to and from.
 ### UnixPayload.py
