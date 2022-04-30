@@ -9,8 +9,10 @@ import json
 from lib import cadaverouscipher
 
 dictionary = cadaverouscipher.generate_dictionary(string.printable)
+print(dictionary)
 try:
     with open('dictionary_key.json', 'w') as dictionary_key:
         json.dump(dictionary, dictionary_key)
+    print('\n[+] Key successfully written to dictionary_key.json.')
 except PermissionError:
     print('Root permissions are needed in order to write to the file dictionary_key.json.')
