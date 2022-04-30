@@ -43,6 +43,8 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
             parser.error('The file dictionary_key.json does not exist in the ShadowSharkReverseShell directory.')
         except PermissionError:
             parser.error('Root permissions are needed in order to read the file dictionary_key.json.')
+        except json.decoder.JSONDecodeError:
+            parser.error('Invalid key found in dictionary_key.json.')
     return [lhost, lport, encryption, dictionary_key]
 
 def encryption_handler(text, encode=False, decode=False):
