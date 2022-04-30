@@ -13,4 +13,4 @@ try:
     with open('dictionary_key.json', 'w') as dictionary_key:
         json.dumps(dictionary, dictionary_key)
 except PermissionsError:
-  print('Root permissions are needed in order to write to the file dictionary_key.json.')
+    print('Root permissions are needed in order to write to the file dictionary_key.json.')
