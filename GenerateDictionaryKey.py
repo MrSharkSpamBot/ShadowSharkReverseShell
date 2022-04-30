@@ -12,7 +12,7 @@ dictionary = cadaverouscipher.generate_dictionary(string.printable)
 try:
     with open('dictionary_key.json', 'w') as dictionary_key:
         json.dump(dictionary, dictionary_key)
-    print('[+] Key successfully written to dictionary_key.json.')
+    print('[+] Key successfully written to dictionary_key.json.\n')
     print(dictionary)
 except PermissionError:
     print('Root permissions are needed in order to write to the file dictionary_key.json.')
