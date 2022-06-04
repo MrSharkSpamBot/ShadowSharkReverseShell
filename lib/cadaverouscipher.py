@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-An uncrackable substitution cipher which uses randomly generated characters as substitutes.
+A simple substitution cipher which uses randomly generated characters as substitutes.
 
 @author: Mr. Shark Spam Bot
 """
-import random
+import secrets
 
 def generate_dictionary(characters):
     '''
@@ -24,12 +24,13 @@ def generate_dictionary(characters):
     if not isinstance(characters, str):
         raise TypeError('characters must be a str object')
     dictionary = {}
+    system_random = secrets.SystemRandom()
     for character in characters:
-        substitute_character = chr(random.randint(0, 1000000))
+        substitute_character = chr(system_random.randint(0, 1000000))
         while True:
             if not substitute_character in dictionary.values():
                 break
-            substitute_character = chr(random.randint(0, 1000000))
+            substitute_character = chr(system_random.randint(0, 1000000))
         dictionary.update({character: substitute_character})
     return dictionary
 
