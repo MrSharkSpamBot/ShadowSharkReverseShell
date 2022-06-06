@@ -10,7 +10,7 @@ import sys
 import codecs
 import json
 import readline
-from lib import cadaverouscipher
+from lib import CadaverousCipher as cc
 
 def get_arguments():
     '''Get the lhost and lport.'''
@@ -59,7 +59,7 @@ def encryption_handler(text, encode=False, decode=False):
             new_text = codecs.encode(new_text, encoding='base64')
         new_text = new_text.decode()
         if encryption == 'cadaverouscipher':
-            new_text = cadaverouscipher.encrypt(new_text, dictionary_key)
+            new_text = cc.encrypt(new_text, dictionary_key)
         new_text = json.dumps(new_text)
         new_text = new_text.encode()
     if decode is True:
@@ -71,7 +71,7 @@ def encryption_handler(text, encode=False, decode=False):
             new_text = codecs.decode(new_text, encoding='base64')
         new_text = new_text.decode()
         if encryption == 'cadaverouscipher':
-            new_text = cadaverouscipher.decrypt(new_text, dictionary_key)
+            new_text = cc.decrypt(new_text, dictionary_key)
     return new_text
 
 def listen():
