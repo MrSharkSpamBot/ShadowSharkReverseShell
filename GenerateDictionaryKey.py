@@ -8,7 +8,7 @@ import string
 import json
 from lib import cadaverouscipher
 
-dictionary = cadaverouscipher.generate_dictionary(string.printable)
+dictionary = cadaverouscipher.generate_dictionary(string.printable, 5)
 try:
     with open('dictionary_key.json', 'w') as dictionary_key:
         json.dump(dictionary, dictionary_key)
