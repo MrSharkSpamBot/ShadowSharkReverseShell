@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-A polyalphabetic substitution cipher which uses randomly generated characters as substitutes.
+A permutation based substitution cipher which uses randomly generated characters as substitutes.
 
 @author: Mr. Shark Spam Bot
 """
 import secrets
+import itertools
 
-def generate_dictionary(characters):
+def generate_dictionary(characters, subdictionary_count):
     '''
     Generate a dictionary which serves as an encryption key.
 
     Parameters
     ----------
     characters : str
-        Characters to each be paired with two unique substitutes.
+        Characters to each be paired with one or more unique substitutes.
+    subdictionary_count : int
+        The number of sub dictionaries inside of the main dictionary which each contain unique substitutes for each character.
 
     Returns
     -------
@@ -23,18 +26,20 @@ def generate_dictionary(characters):
     '''
     if not isinstance(characters, str):
         raise TypeError('characters must be a str object')
+    if not isinstance(subdictionary_count, int):
+        raise TypeError('dictionary_count must be an int object')
     dictionary = {}
     system_random = secrets.SystemRandom()
-    for i in range(1, 3):
-        half_dictionary = {}
+    for i in range(1, (subdictionary_count + 1)):
+        sub_dictionary = {}
         for character in characters:
             substitute_character = chr(system_random.randint(0, 1000000))
             while True:
-                if not substitute_character in half_dictionary.values():
+                if not substitute_character in sub_dictionary.values():
                     break
                 substitute_character = chr(system_random.randint(0, 1000000))
-            half_dictionary.update({character: substitute_character})
-        dictionary.update({i: half_dictionary})
+            sub_dictionary.update({character: substitute_character})
+        dictionary.update({i: sub_dictionary})
     return dictionary
 
 def encrypt(text, dictionary):
@@ -59,16 +64,24 @@ def encrypt(text, dictionary):
     if not isinstance(dictionary, dict):
         raise TypeError('dictionary must be a dict object')
     encrypted_text = ''
-    dictionary1 = dictionary[1]
-    dictionary2 = dictionary[2]
-    for index, character in enumerate(text):
-        if character in dictionary1.keys() or character in dictionary2.keys():
-            if index % 2 == 0:
-                encrypted_text += dictionary2[character]
+    len_dictionary_keys = len(dictionary.keys())
+    perms = list(itertools.permutations(range(1, len_dictionary_keys+1)))
+    sliced_text = []
+    for i in range(0, len(text), len_dictionary_keys):
+        sliced_text.append(text[i: i+len_dictionary_keys])
+    index = 0
+    for slice_chars in sliced_text:
+        if index >= len(perms):
+            index = 0
+        perm = perms[index]
+        for number, character in itertools.zip_longest(perm, slice_chars):
+            if not character:
+                break
+            if character in dictionary[number].keys():
+                encrypted_text += dictionary[number][character]
             else:
-                encrypted_text += dictionary1[character]
-        else:
-            encrypted_text += character
+                encrypted_text += character
+        index += 1
     return encrypted_text
 
 def decrypt(text, dictionary):
@@ -93,18 +106,24 @@ def decrypt(text, dictionary):
     if not isinstance(dictionary, dict):
         raise TypeError('dictionary must be a dict object')
     decrypted_text = ''
-    dictionary1 = dictionary[1]
-    dictionary2 = dictionary[2]
-    characters1 = list(dictionary1.keys())
-    substitute_characters1 = list(dictionary1.values())
-    characters2 = list(dictionary2.keys())
-    substitute_characters2 = list(dictionary2.values())
-    for index, substitute_character in enumerate(text):
-        if substitute_character in substitute_characters1 or substitute_character in substitute_characters2:
-            if index % 2 == 0:
-                decrypted_text += characters2[substitute_characters2.index(substitute_character)]
+    len_dictionary_keys = len(dictionary.keys())
+    perms = list(itertools.permutations(range(1, len_dictionary_keys+1)))
+    sliced_text = []
+    for i in range(0, len(text), len_dictionary_keys):
+        sliced_text.append(text[i: i+len_dictionary_keys])
+    index = 0
+    for slice_chars in sliced_text:
+        if index >= len(perms):
+            index = 0
+        perm = perms[index]
+        for number, substitute_character in itertools.zip_longest(perm, slice_chars):
+            if not substitute_character:
+                break
+            characters = list(dictionary[number].keys())
+            substitute_characters = list(dictionary[number].values())
+            if substitute_character in substitute_characters:
+                decrypted_text += characters[substitute_characters.index(substitute_character)]
             else:
-                decrypted_text += characters1[substitute_characters1.index(substitute_character)]
-        else:
-            decrypted_text += substitute_character
+                decrypted_text += substitute_character
+        index += 1
     return decrypted_text
