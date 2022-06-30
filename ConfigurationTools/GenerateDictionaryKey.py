@@ -4,7 +4,7 @@ This configuration tool generates a CadaverousCipher encryption key and writes i
 
 @author: Mr. Shark Spam Bot
 """
-import sys
+__import__('sys').path.append('..')
 import json
 import string
 import argparse
@@ -32,5 +32,4 @@ def main(subdictionary_count):
         print('Root permissions are needed in order to write to the file dictionary_key.json.')
 
 if __name__ == '__main__':
-    sys.sys.path.append('../lib')
     main(parse_args())
