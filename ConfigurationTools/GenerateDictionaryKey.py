@@ -7,7 +7,7 @@ This configuration tool generates a CadaverousCipher encryption key and writes i
 import json
 import string
 import argparse
-from ..lib.CadaverousCipher import CadaverousCipher as cc
+from .lib.CadaverousCipher import CadaverousCipher as cc
 
 def parse_args():
     '''Get the subdictionary_count.'''
