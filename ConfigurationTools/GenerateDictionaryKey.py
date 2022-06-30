@@ -32,5 +32,5 @@ def main(subdictionary_count):
         print('Root permissions are needed in order to write to the file dictionary_key.json.')
 
 if __name__ == '__main__':
-    sys.sys.path.append('..')
+    sys.sys.path.append('../lib/CadaverousCipher')
     main(parse_args())
