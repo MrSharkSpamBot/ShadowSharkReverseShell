@@ -7,7 +7,7 @@ This configuration tool generates a CadaverousCipher encryption key and writes i
 import json
 import string
 import argparse
-from lib import cadaverouscipher
+from ..lib.CadaverousCipher import CadaverousCipher as cc
 
 def parse_args():
     '''Get the subdictionary_count.'''
@@ -21,7 +21,7 @@ encryption key and writes it to dictionary_key.json.''')
 
 def main(subdictionary_count):
     '''Generate the dictionary key and safe it to dictionary_key.json.'''
-    dictionary = cadaverouscipher.generate_dictionary(string.printable, subdictionary_count)
+    dictionary = cc.generate_dictionary(string.printable, subdictionary_count)
     try:
         with open('dictionary_key.json', 'w') as dictionary_key:
             json.dump(dictionary, dictionary_key)
