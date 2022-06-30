@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-The text colors used by Shadow Shark.
+The text colors used by the Shadow Shark listener.
 
 @author: Mr. Shark Spam Bot
 """
