@@ -5,8 +5,8 @@ This tool is a full fledged reverse TCP handler used to interact with Shadow Sha
 @author: Mr. Shark Spam Bot
 """
 import readline
-import lib.ShadowShark.parser
-import lib.ShadowShark.listener
+from lib.ShadowShark import parser
+from lib.ShadowShark import listener
 
 def main():
     lhost, lport, encryption, dictionary_key = parser.get_arguments()
