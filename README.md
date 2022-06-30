@@ -8,6 +8,7 @@ $ sudo apt-get install python3 python3-pip git
 $ cd /opt/
 $ sudo git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 $ cd ShadowSharkReverseShell/
+$ pip3 install -r requirements.txt
 $ sudo chmod +x ShadowShark
 $ sudo cp ShadowShark /usr/bin/
 ```
@@ -17,6 +18,7 @@ $ sudo pacman -S python python-pip git
 $ cd /opt/
 $ sudo git clone https://github.com/MrSharkSpamBot/ShadowSharkReverseShell.git
 $ cd ShadowSharkReverseShell/
+$ pip3 install -r requirements.txt
 $ sudo chmod +x ShadowShark
 $ sudo cp ShadowShark /usr/bin/
 ```
