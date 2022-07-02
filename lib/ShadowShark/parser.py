@@ -33,7 +33,7 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
         parser.error('Only hex, base64, and CadaverousCipher encryptions are supported.')
     if encryption == 'cadaverouscipher':
         try:
-            with open('ConfigurationTools/dictionary_key.json', 'r') as dictionary_key:
+            with open('Configuration/dictionary_key.json', 'r') as dictionary_key:
                 dictionary_key = json.load(dictionary_key)
         except FileNotFoundError:
             parser.error('The file dictionary_key.json does not exist in the ShadowSharkReverseShell directory.')
