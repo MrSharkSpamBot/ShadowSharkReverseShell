@@ -33,8 +33,7 @@ def main(subdictionary_count):
     try:
         pyperclip.copy(str(dictionary))
         print('[+] Successfully copied dictionary to clipboard.')
-    except Exception as e:
-        print(e)
+    except:
         print('[-] Could not copy dictionary to clipboard.')
 
 if __name__ == '__main__':
