@@ -127,4 +127,4 @@ class ShadowShark:
     def main(self):
         '''Execute the listener.'''
         self.listen()
-        self.main()
+        self.interact()
