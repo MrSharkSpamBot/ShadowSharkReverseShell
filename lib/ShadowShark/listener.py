@@ -63,6 +63,7 @@ class ShadowShark:
                     break
             except ValueError:
                 continue
+        data = self.encryption_handler(data, decode=True)
         return data
 
     def listen(self):
