@@ -1,3 +1,4 @@
 py2exe>=0.11.0.1
 nuitka>=0.7.7
 zstandard>=0.16.0
+pyperclip>=1.8.2
