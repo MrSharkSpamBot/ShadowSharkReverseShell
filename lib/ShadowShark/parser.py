@@ -36,9 +36,16 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
             with open('Configuration/dictionary_key.json', 'r') as dictionary_key:
                 dictionary_key = json.load(dictionary_key)
         except FileNotFoundError:
-            parser.error('The file dictionary_key.json does not exist in the ShadowSharkReverseShell directory.')
+            parser.error('The file dictionary_key.json does not exist in the ShadowSharkReverseShell/Configuration directory.')
         except PermissionError:
             parser.error('Root permissions are needed in order to read the file dictionary_key.json.')
         except json.decoder.JSONDecodeError:
             parser.error('Invalid key found in dictionary_key.json.')
-    return [lhost, lport, encryption, dictionary_key]
+        try:
+            with open('Configuration/key.txt', 'r') as key_file:
+                key = key_file.read().decode()
+        except FileNotFoundError:
+            parser.error('The file key.txt does not exist in the ShadowSharkReverseShell/Configuration directory.')
+        except PermissionError:
+            parser.error('Root permissions are needed in order to read the file key.txt.')
+    return [lhost, lport, encryption, dictionary_key, key]
