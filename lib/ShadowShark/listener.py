@@ -14,11 +14,12 @@ from lib.CadaverousCipher import CadaverousCipher as cc
 
 class ShadowShark:
     '''The Shadow Shark listener.'''
-    def __init__(self, lhost, lport, encryption, dictionary_key):
+    def __init__(self, lhost, lport, encryption, dictionary_key, key):
         self.lhost = lhost
         self.lport = lport
         self.encryption = encryption
         self.dictionary_key = dictionary_key
+        self.key = key
 
     def encryption_handler(self, text, encode=False, decode=False):
         '''Encode or decode text using hex or base64.'''
@@ -30,7 +31,7 @@ class ShadowShark:
                 new_text = codecs.encode(new_text, encoding='base64')
             new_text = new_text.decode()
             if self.encryption == 'cadaverouscipher':
-                new_text = cc.encrypt(new_text, self.dictionary_key)
+                new_text = cc.encrypt(new_text, self.dictionary_key, self.key)
             new_text = json.dumps(new_text)
             new_text = new_text.encode()
         if decode is True:
@@ -48,7 +49,7 @@ class ShadowShark:
                 new_text = codecs.decode(new_text, encoding='base64')
             new_text = new_text.decode()
             if self.encryption == 'cadaverouscipher':
-                new_text = cc.decrypt(new_text, self.dictionary_key)
+                new_text = cc.decrypt(new_text, self.dictionary_key, self.key)
         return new_text
 
     def recv_infinite_data(self):
