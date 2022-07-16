@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-This configuration tool generates a CadaverousCipher encryption key and writes it to dictionary_key.json.
+This configuration tool generates a CadaverousCipher encryption key and dictionary mapping, and writes it to key.txt and dictionary_key.json respectively.
 
 @author: Mr. Shark Spam Bot
 """
 __import__('sys').path.append('..')
 import json
 import string
+import secrets
 import argparse
 import pyperclip
 from lib.CadaverousCipher import CadaverousCipher as cc
@@ -14,7 +15,7 @@ from lib.CadaverousCipher import CadaverousCipher as cc
 def parse_args():
     '''Get the subdictionary_count.'''
     parser = argparse.ArgumentParser(description='''This configuration tool generates a CadaverousCipher
-encryption key and writes it to dictionary_key.json.''')
+encryption key and dictionary mapping, and writes it to key.txt and dictionary_key.json respectively.''')
     parser.add_argument('-sdc', '--subdictionary-count', dest='subdictionary_count', required=True, type=int,
                         help='The number of sub dictionaries inside of the main dictionary which each contain unique substitutes for each character.')
     arguments = parser.parse_args()
@@ -23,11 +24,18 @@ encryption key and writes it to dictionary_key.json.''')
 
 def main(subdictionary_count):
     '''Generate the dictionary key and safe it to dictionary_key.json.'''
+    key = secrets.token_urlsafe()
+    try:
+        with open('key.txt', 'w') as key_file:
+            key_file.write(key.encode())
+        print('[+] Key successfully written to key.txt.')
+    except PermissionError:
+        print('Root permissions are needed in order to write to the file key.txt')
     dictionary = cc.generate_dictionary(string.printable, subdictionary_count)
     try:
         with open('dictionary_key.json', 'w') as dictionary_key:
             json.dump(dictionary, dictionary_key)
-        print('[+] Key successfully written to dictionary_key.json.')
+        print('[+] Dictionary successfully written to dictionary_key.json.')
     except PermissionError:
         print('Root permissions are needed in order to write to the file dictionary_key.json.')
     try:
