@@ -5,6 +5,7 @@ This configuration tool generates a CadaverousCipher encryption key and dictiona
 @author: Mr. Shark Spam Bot
 """
 __import__('sys').path.append('..')
+import sys
 import json
 import string
 import secrets
@@ -30,14 +31,16 @@ def main(subdictionary_count):
             key_file.write(key.encode())
         print('[+] Key successfully written to key.txt.')
     except PermissionError:
-        print('Root permissions are needed in order to write to the file key.txt')
+        print('[-] Root permissions are needed in order to write to the file key.txt')
+        sys.exit()
     dictionary = cc.generate_dictionary(string.printable, subdictionary_count)
     try:
         with open('dictionary_key.json', 'w') as dictionary_key:
             json.dump(dictionary, dictionary_key)
         print('[+] Dictionary successfully written to dictionary_key.json.')
     except PermissionError:
-        print('Root permissions are needed in order to write to the file dictionary_key.json.')
+        print('[-] Root permissions are needed in order to write to the file dictionary_key.json.')
+        sys.exit()
     try:
         pyperclip.copy(str(dictionary))
         print('[+] Successfully copied dictionary to clipboard.')
