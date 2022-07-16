@@ -9,8 +9,8 @@ from lib.ShadowShark import parser
 from lib.ShadowShark import listener
 
 def main():
-    lhost, lport, encryption, dictionary_key = parser.get_arguments()
-    listener.ShadowShark(lhost, lport, encryption, dictionary_key).main()
+    lhost, lport, encryption, dictionary_key, key = parser.get_arguments()
+    listener.ShadowShark(lhost, lport, encryption, dictionary_key, key).main()
 
 if __name__ == '__main__':
     print('''
