@@ -28,7 +28,7 @@ def main(subdictionary_count):
     key = secrets.token_urlsafe()
     try:
         with open('key.txt', 'w') as key_file:
-            key_file.write(key.encode())
+            key_file.write(key)
         print('[+] Key successfully written to key.txt.')
     except PermissionError:
         print('[-] Root permissions are needed in order to write to the file key.txt')
