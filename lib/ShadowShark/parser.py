@@ -45,6 +45,7 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
         try:
             with open('Configuration/key.txt', 'r') as key_file:
                 key = key_file.read()
+                print(key)
         except FileNotFoundError:
             parser.error('The file key.txt does not exist in the ShadowSharkReverseShell/Configuration directory.')
         except PermissionError:
