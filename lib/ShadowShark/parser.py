@@ -23,6 +23,7 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
     lport = arguments.lport
     encryption = arguments.encryption.lower()
     dictionary_key = {}
+    key = ''
     try:
         socket.inet_aton(lhost)
     except socket.error:
@@ -43,8 +44,7 @@ used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
             parser.error('Invalid key found in dictionary_key.json.')
         try:
             with open('Configuration/key.txt', 'r') as key_file:
-                key = key_file.read().decode()
-                print(key)
+                key = key_file.read()
         except FileNotFoundError:
             parser.error('The file key.txt does not exist in the ShadowSharkReverseShell/Configuration directory.')
         except PermissionError:
