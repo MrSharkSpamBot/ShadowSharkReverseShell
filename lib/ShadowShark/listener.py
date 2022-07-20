@@ -39,15 +39,20 @@ class ShadowShark:
                 new_text = json.loads(text)
             except json.decoder.JSONDecodeError:
                 new_text = text.decode()
-            new_text = new_text.encode()
+            if self.encryption in ['hex', 'base64']:
+                new_text = new_text.encode()
             if self.encryption == 'hex':
                 try:
                     new_text = codecs.decode(new_text, encoding='hex')
                 except binascii.Error:
                     pass
             if self.encryption == 'base64':
-                new_text = codecs.decode(new_text, encoding='base64')
-            new_text = new_text.decode()
+                try:
+                    new_text = codecs.decode(new_text, encoding='base64')
+                except binascii.Error:
+                    pass
+            if self.encryption in ['hex', 'base64']:
+                new_text = new_text.decode()
             if self.encryption == 'cadaverouscipher':
                 new_text = cc.decrypt(new_text, self.dictionary_key, self.key)
         return new_text
