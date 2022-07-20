@@ -38,7 +38,7 @@ class ShadowShark:
             try:
                 new_text = json.loads(text)
             except json.decoder.JSONDecodeError:
-                pass
+                new_text = text
             new_text = new_text.encode()
             if self.encryption == 'hex':
                 try:
