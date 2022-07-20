@@ -1,4 +1,5 @@
 # Cadaverous Cipher
+## NOTE: This version of CadaverousCipher is specifically made for ShadowSharkReverse Shell. Use <a href="https://github.com/MrSharkSpamBot/CadaverousCipher">CadaverousCipher</a> for general encryption or learning purposes.
 A permutation based substitution cipher which uses randomly generated characters as substitutes.
 
 ## Installation
