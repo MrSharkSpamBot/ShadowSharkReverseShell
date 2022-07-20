@@ -39,7 +39,7 @@ def generate_dictionary(characters, subdictionary_count):
                     break
                 substitute_character = chr(system_random.randint(0, 0x110000 - 1))
             sub_dictionary.update({character: substitute_character})
-        dictionary.update({i: sub_dictionary})
+        dictionary.update({str(i): sub_dictionary})
     return dictionary
 
 def encrypt(text, dictionary, key):
@@ -84,8 +84,8 @@ def encrypt(text, dictionary, key):
                 break
             if key_index >= len(key):
                 key_index = 0
-            if character in dictionary[number].keys():
-                substitute_character = chr(abs(ord(dictionary[number][character]) - ord(dictionary[number][key[key_index]])))
+            if character in dictionary[str(number)].keys():
+                substitute_character = chr(abs(ord(dictionary[str(number)][character]) - ord(dictionary[str(number)][key[key_index]])))
                 encrypted_text += substitute_character
             else:
                 encrypted_text += character
@@ -135,13 +135,13 @@ def decrypt(text, dictionary, key):
                 break
             if key_index >= len(key):
                 key_index = 0
-            characters = list(dictionary[number].keys())
-            substitute_characters = list(dictionary[number].values())
-            replacement_substitute_character = ord(substitute_character) + ord(dictionary[number][key[key_index]])
+            characters = list(dictionary[str(number)].keys())
+            substitute_characters = list(dictionary[str(number)].values())
+            replacement_substitute_character = ord(substitute_character) + ord(dictionary[str(number)][key[key_index]])
             if replacement_substitute_character in range(0x110000):
                 replacement_substitute_character = chr(replacement_substitute_character)
             if not replacement_substitute_character in substitute_characters:
-                replacement_substitute_character = chr(abs(ord(dictionary[number][key[key_index]]) - ord(substitute_character)))
+                replacement_substitute_character = chr(abs(ord(dictionary[str(number)][key[key_index]]) - ord(substitute_character)))
             if replacement_substitute_character in substitute_characters:
                 decrypted_text += characters[substitute_characters.index(replacement_substitute_character)]
             else:
