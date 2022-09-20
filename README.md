@@ -1,5 +1,5 @@
 # Shadow Shark Reverse Shell 
-A full fledged reverse TCP payload written in pure python3.
+A reverse TCP payload written in pure python3.
 
 ## Installation
 ### Debian
