@@ -22,7 +22,7 @@ class ShadowShark:
         self.key = key
 
     def encryption_handler(self, text, encode=False, decode=False):
-        '''Encode or decode text using hex or base64.'''
+        '''Encode or decode text using hex or base64, or encrypt text using the CadaverousCipher.'''
         if encode is True:
             new_text = text.encode()
             if self.encryption == 'hex':
