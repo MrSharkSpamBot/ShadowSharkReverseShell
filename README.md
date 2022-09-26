@@ -1,5 +1,5 @@
 # Shadow Shark Reverse Shell 
-A python based reverse TCP payload. Currently under heavy development.
+A reverse TCP payload and listener both written in python3. Currently under heavy development.
 
 ## Installation
 ### Debian
