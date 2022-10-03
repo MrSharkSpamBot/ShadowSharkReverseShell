@@ -4,6 +4,7 @@ The argument parser for the Shadow Shark listener.
 
 @author: Mr. Shark Spam Bot
 """
+
 import json
 import socket
 import argparse
