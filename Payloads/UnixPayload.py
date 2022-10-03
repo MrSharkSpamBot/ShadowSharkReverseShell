@@ -4,6 +4,7 @@ A full fledged Shadow Shark payload for Unix.
 
 @author: Mr. Shark Spam Bot
 """
+
 import socket
 import subprocess
 import os
