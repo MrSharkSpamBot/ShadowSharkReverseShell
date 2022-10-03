@@ -2,8 +2,12 @@
 """
 A keyed permutation based substitution cipher which uses randomly generated substitute characters as a character mapping.
 
+NOTE:
+This is a modified version of the CadaverousCiper. For any purpose of usage other than the ShadowSharkReverseShell, use https://github.com/MrSharkSpamBot/CadaverousCipher.
+
 @author: Mr. Shark Spam Bot
 """
+
 import secrets
 import itertools
 
