@@ -1,12 +1,14 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This tool is a full fledged reverse TCP handler used to interact with Shadow Shark payloads.
+The multipurpose tool to use all ShadowSharkReverseShell features.
 
 @author: Mr. Shark Spam Bot
 """
+
 import readline
-from lib.ShadowShark import parser
-from lib.ShadowShark import listener
+from lib.common import parser
+from lib.server import listener
 
 def main():
     lhost, lport, encryption, dictionary_key, key = parser.get_arguments()
