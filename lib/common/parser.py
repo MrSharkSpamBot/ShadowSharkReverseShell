@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-The argument parser for the Shadow Shark listener.
+The argument parser for all ShadowSharkReverseShell tools.
 
 @author: Mr. Shark Spam Bot
 """
