@@ -4,13 +4,14 @@ The Shadow Shark listener.
 
 @author: Mr. Shark Spam Bot
 """
+
 import sys
 import json
 import socket
 import codecs
 import binascii
-from lib.ShadowShark import colors
-from lib.CadaverousCipher import CadaverousCipher as cc
+from lib.listener import colors
+from lib.common import cc
 
 class ShadowShark:
     '''The Shadow Shark listener.'''
