@@ -4,6 +4,7 @@ A full fledged Shadow Shark payload for Windows.
 
 @author: Mr. Shark Spam Bot
 """
+
 import socket
 import subprocess
 import os
