@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-A full fledged Shadow Shark payload.
+The original Shadow Shark payload.
 
 @author: Mr. Shark Spam Bot
 """
+
 import socket
 import subprocess
 import os
