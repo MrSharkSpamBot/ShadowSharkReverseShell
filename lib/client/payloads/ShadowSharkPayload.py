@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 The original Shadow Shark payload.
+Not recommended to use. It's still in the repository because it's og.
 
 @author: Mr. Shark Spam Bot
 """
