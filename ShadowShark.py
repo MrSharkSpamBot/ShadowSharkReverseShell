@@ -10,7 +10,7 @@ import readline
 from lib.common import parser
 from lib.server import listener
 
-def main():
+def main() -> None:
     lhost, lport, encryption, dictionary_key, key = parser.get_arguments()
     listener.ShadowShark(lhost, lport, encryption, dictionary_key, key).main()
 
