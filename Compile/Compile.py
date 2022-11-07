@@ -4,6 +4,7 @@ This script is used to compile Shadow Shark payloads into stand alone exe files.
 
 @author: Mr. Shark Spam Bot
 """
+
 import distutils
 import sys
 import py2exe
