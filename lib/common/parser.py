@@ -9,7 +9,7 @@ import json
 import socket
 import argparse
 
-def get_arguments():
+def get_arguments() -> list:
     '''Get the lhost, lport, encryption, and dictionary_key.'''
     parser = argparse.ArgumentParser(description='''This tool is a full fledged reverse TCP handler
 used to interact with Shadow Shark payloads. Created by Mr. Shark Spam Bot.''')
