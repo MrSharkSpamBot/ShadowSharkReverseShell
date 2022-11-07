@@ -4,6 +4,7 @@ This configuration tool generates a CadaverousCipher encryption key and dictiona
 
 @author: Mr. Shark Spam Bot
 """
+
 __import__('sys').path.append('..')
 import sys
 import json
