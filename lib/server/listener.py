@@ -11,7 +11,7 @@ import socket
 import codecs
 import binascii
 import threading
-from lib.listener import colors
+from lib.server import colors
 from lib.common import cc
 
 class ShadowShark:
