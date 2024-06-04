@@ -12,7 +12,7 @@ import string
 import secrets
 import argparse
 import pyperclip
-from lib.CadaverousCipher import CadaverousCipher as cc
+from lib.common import cc
 
 def parse_args():
     '''Get the subdictionary_count.'''
